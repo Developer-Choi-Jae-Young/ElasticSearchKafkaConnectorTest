@@ -1,0 +1,11 @@
+//PUT http://localhost:9200/user/_mapping
+{
+  "properties": {
+    "name": {
+      "type": "text",
+      "store": true,
+      "analyzer": "suggest_index_analyzer",
+      "search_analyzer": "suggest_search_analyzer"
+    }
+  }
+}

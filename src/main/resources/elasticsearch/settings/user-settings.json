@@ -1,0 +1,42 @@
+//PUT http://localhost:9200/user
+{
+  "settings": {
+    "index.max_ngram_diff": 50,
+    "index": {
+      "analysis": {
+        "filter": {
+          "suggest_filter": {
+            "type": "ngram",
+            "min_gram": 2,
+            "max_gram": 50
+          }
+        },
+        "tokenizer": {
+          "jaso_search_tokenizer": {
+            "type": "jaso_tokenizer",
+            "mistype": true,
+            "chosung": false
+          },
+          "jaso_index_tokenizer": {
+            "type": "jaso_tokenizer",
+            "mistype": true,
+            "chosung": true
+          }
+        },
+        "analyzer": {
+          "suggest_search_analyzer": {
+            "type": "custom",
+            "tokenizer": "jaso_search_tokenizer"
+          },
+          "suggest_index_analyzer": {
+            "type": "custom",
+            "tokenizer": "jaso_index_tokenizer",
+            "filter": [
+              "suggest_filter"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
