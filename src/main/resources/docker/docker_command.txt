@@ -31,6 +31,16 @@ docker run -d --name broker \
 --network my-network \
 confluentinc/cp-kafka:latest
 
+[kafka ui]
+
+docker run -d --name kafka-ui \
+  -p 9797:8080 \
+  -e KAFKA_CLUSTERS_0_NAME=local \
+  -e KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=broker:29092 \
+  -e KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181 \
+  --network my-network \
+  provectuslabs/kafka-ui:latest
+
 [kafka connect]
 
 docker run -d --name kafka-connector \
